@@ -13,6 +13,7 @@
 		1663A5FD1AB516890031F7C8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1663A5FC1AB516890031F7C8 /* Images.xcassets */; };
 		1663A6001AB516890031F7C8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1663A5FE1AB516890031F7C8 /* LaunchScreen.xib */; };
 		1663A60C1AB5168A0031F7C8 /* MemolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1663A60B1AB5168A0031F7C8 /* MemolTests.swift */; };
+		166BCB4D1AB5695F00E69738 /* MarkdownTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166BCB4C1AB5695F00E69738 /* MarkdownTextView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		1663A6051AB5168A0031F7C8 /* MemolTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemolTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1663A60A1AB5168A0031F7C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1663A60B1AB5168A0031F7C8 /* MemolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemolTests.swift; sourceTree = "<group>"; };
+		166BCB4C1AB5695F00E69738 /* MarkdownTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				1663A5FC1AB516890031F7C8 /* Images.xcassets */,
 				1663A5FE1AB516890031F7C8 /* LaunchScreen.xib */,
 				1663A5F31AB516890031F7C8 /* Supporting Files */,
+				166BCB4C1AB5695F00E69738 /* MarkdownTextView.swift */,
 			);
 			path = Memol;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 			files = (
 				1663A5F81AB516890031F7C8 /* ViewController.swift in Sources */,
 				1663A5F61AB516890031F7C8 /* AppDelegate.swift in Sources */,
+				166BCB4D1AB5695F00E69738 /* MarkdownTextView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +409,7 @@
 				1663A6111AB5168A0031F7C8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1663A6121AB5168A0031F7C8 /* Build configuration list for PBXNativeTarget "MemolTests" */ = {
 			isa = XCConfigurationList;
@@ -413,6 +418,7 @@
 				1663A6141AB5168A0031F7C8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
