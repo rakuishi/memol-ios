@@ -15,6 +15,7 @@
 		1663A60C1AB5168A0031F7C8 /* MemolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1663A60B1AB5168A0031F7C8 /* MemolTests.swift */; };
 		166BCB4D1AB5695F00E69738 /* MarkdownTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166BCB4C1AB5695F00E69738 /* MarkdownTextView.swift */; };
 		166BCB571AB5BB3C00E69738 /* MarkdownParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166BCB561AB5BB3C00E69738 /* MarkdownParser.swift */; };
+		166BCB591AB5C1B500E69738 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 166BCB581AB5C1B500E69738 /* UIColor+Hex.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		1663A60B1AB5168A0031F7C8 /* MemolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemolTests.swift; sourceTree = "<group>"; };
 		166BCB4C1AB5695F00E69738 /* MarkdownTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownTextView.swift; sourceTree = "<group>"; };
 		166BCB561AB5BB3C00E69738 /* MarkdownParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownParser.swift; sourceTree = "<group>"; };
+		166BCB581AB5C1B500E69738 /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 				1663A5FC1AB516890031F7C8 /* Images.xcassets */,
 				1663A5FE1AB516890031F7C8 /* LaunchScreen.xib */,
 				1663A5F31AB516890031F7C8 /* Supporting Files */,
+				166BCB581AB5C1B500E69738 /* UIColor+Hex.swift */,
 				166BCB561AB5BB3C00E69738 /* MarkdownParser.swift */,
 				166BCB4C1AB5695F00E69738 /* MarkdownTextView.swift */,
 			);
@@ -222,6 +225,7 @@
 				1663A5F61AB516890031F7C8 /* AppDelegate.swift in Sources */,
 				166BCB4D1AB5695F00E69738 /* MarkdownTextView.swift in Sources */,
 				166BCB571AB5BB3C00E69738 /* MarkdownParser.swift in Sources */,
+				166BCB591AB5C1B500E69738 /* UIColor+Hex.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
