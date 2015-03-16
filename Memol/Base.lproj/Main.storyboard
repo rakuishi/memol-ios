@@ -2,13 +2,15 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="IMq-MF-tST">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
         <scene sceneID="nmT-Mr-oMM">
             <objects>
                 <navigationController id="IMq-MF-tST" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GPZ-oO-5eh">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="GPZ-oO-5eh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -20,7 +22,7 @@
             </objects>
             <point key="canvasLocation" x="-1163" y="374"/>
         </scene>
-        <!--View Controller-->
+        <!--Memol-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="Memol" customModuleProvider="target" sceneMemberID="viewController">
@@ -29,11 +31,11 @@
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SCt-u8-y3g" customClass="MarkdownTextView" customModule="Memol" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="SCt-u8-y3g" customClass="MarkdownTextView" customModule="Memol" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text"># Memol
 
@@ -45,14 +47,28 @@
 
 * Simple
 * Beautiful
-* Useful</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+* Useful
+
+## Code
+
+`let regex = NSRegularExpression(pattern: pattern, options: nil, error: nil)`</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="SCt-u8-y3g" secondAttribute="bottom" id="HKW-le-RDD"/>
+                            <constraint firstItem="SCt-u8-y3g" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="ed8-cs-Xdn"/>
+                            <constraint firstItem="SCt-u8-y3g" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="m6m-ST-Ajd"/>
+                            <constraint firstItem="SCt-u8-y3g" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="oy5-Ch-Fsc"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="SCt-u8-y3g" secondAttribute="bottom" id="rrB-dA-7Gn"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="SCt-u8-y3g" secondAttribute="trailing" constant="-16" id="wCR-gO-j9s"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="9IM-tC-yvv"/>
+                    <navigationItem key="navigationItem" title="Memol" id="gkl-4g-7aO">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="b2W-7d-c1J"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="markdownTextView" destination="SCt-u8-y3g" id="Cei-Rr-CBl"/>
                     </connections>
