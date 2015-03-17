@@ -12,9 +12,8 @@ enum MarkdownElement : Printable {
     case Head
     case Bold
     case List
-    case Code
-    case CodeBlock
     case Blockquote
+    case Code
     case Link
     case Image
     
@@ -28,12 +27,10 @@ enum MarkdownElement : Printable {
                 return prefix + "Bold"
             case List:
                 return prefix + "List"
-            case Code:
-                return prefix + "Code"
-            case CodeBlock:
-                return prefix + "CodeBlock"
             case Blockquote:
                 return prefix + "Blockquote"
+            case Code:
+                return prefix + "Code"
             case Link:
                 return prefix + "Link"
             case Image:
@@ -61,9 +58,13 @@ class MarkdownParser: NSObject {
 
         // setup markdown pattern
         markdownPatterns = [
-            MarkdownElement.Head : "((^#+|\\n#+)(.*))",
-            MarkdownElement.Bold : "(\\*(.+?)\\*)",
-            MarkdownElement.List : "(\\n\\*)\\s",
+            MarkdownElement.Head : "(\\n#+.*)",
+            MarkdownElement.Bold : "(\\*.+?\\*)",
+            MarkdownElement.List : "(\\n[\\*|-])\\s",
+            MarkdownElement.Blockquote : "(\\n\\>)\\s",
+            MarkdownElement.Code : "(`.+?`)",
+            MarkdownElement.Link : "(\\[[^\\]]*\\]\\([^\\)]*\\))",
+            MarkdownElement.Image : "(!\\[[^\\]]*\\]\\([^\\)]*\\))",
         ]
 
         for (element, pattern) in markdownPatterns {

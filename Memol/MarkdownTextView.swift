@@ -12,9 +12,9 @@ class MarkdownTextView: UITextView {
     
     var themeTextColor: UIColor!
     var themeBackgroundColor: UIColor!
-    var themeHeadColor: UIColor!    // Head
-    var themeTintColor: UIColor!    // Bold, List
-    var themeCodeColor: UIColor!    // Code, CodeBlock, Link, Image
+    var themeHeadColor: UIColor!
+    var themeTintColor: UIColor!
+    var themeCodeColor: UIColor!
     var themeFont: UIFont!
     var themeBoldFont: UIFont!
     
@@ -32,8 +32,8 @@ class MarkdownTextView: UITextView {
         self.themeTintColor = UIColor(rgb: "#EFB944")
         self.themeCodeColor = UIColor(rgb: "#92A5A6")
         
-        self.themeFont = UIFont(name: "AvenirNext-Medium", size: 15.0)
-        self.themeBoldFont = UIFont(name: "AvenirNext-DemiBold", size: 15.0)
+        self.themeFont = UIFont(name: "AvenirNext-Medium", size: 16.0)
+        self.themeBoldFont = UIFont(name: "AvenirNext-DemiBold", size: 16.0)
         
         self.backgroundColor = self.themeBackgroundColor;
         self.textColor = self.themeTextColor;
@@ -53,6 +53,14 @@ class MarkdownTextView: UITextView {
             switch result.element {
             case .Head:
                 attributedString.addAttributes(headAttribute(), range: result.range)
+            case .Bold:
+                attributedString.addAttributes(boldAttribute(), range: result.range)
+            case .List:
+                attributedString.addAttributes(listAttribute(), range: result.range)
+            case .Blockquote:
+                attributedString.addAttributes(blockquoteAttribute(), range: result.range)
+            case .Code, .Link, .Image:
+                attributedString.addAttributes(codeAttribute(), range: result.range)
             default:
                 break
             }
@@ -67,5 +75,21 @@ class MarkdownTextView: UITextView {
     
     func headAttribute() -> [NSObject: AnyObject] {
         return [NSFontAttributeName: self.themeBoldFont, NSForegroundColorAttributeName: self.themeHeadColor]
+    }
+
+    func boldAttribute() -> [NSObject: AnyObject] {
+        return [NSFontAttributeName: self.themeBoldFont, NSForegroundColorAttributeName: self.themeTextColor]
+    }
+
+    func listAttribute() -> [NSObject: AnyObject] {
+        return [NSFontAttributeName: self.themeFont, NSForegroundColorAttributeName: self.themeTintColor]
+    }
+
+    func blockquoteAttribute() -> [NSObject: AnyObject] {
+        return [NSFontAttributeName: self.themeBoldFont, NSForegroundColorAttributeName: self.themeTextColor]
+    }
+    
+    func codeAttribute() -> [NSObject: AnyObject] {
+        return [NSFontAttributeName: self.themeFont, NSForegroundColorAttributeName: self.themeCodeColor];
     }
 }
