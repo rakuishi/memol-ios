@@ -58,7 +58,7 @@ class MarkdownParser: NSObject {
 
         // setup markdown pattern
         markdownPatterns = [
-            MarkdownElement.Head : "(\\n#+.*)",
+            MarkdownElement.Head : "((^#+|\\n#+).*)",
             MarkdownElement.Bold : "(\\*.+?\\*)",
             MarkdownElement.List : "(\\n[\\*|-])\\s",
             MarkdownElement.Blockquote : "(\\n\\>)\\s",
