@@ -11,7 +11,6 @@ import UIKit
 enum MarkdownElement : Printable {
     case Head
     case Bold
-    case Italic
     case List
     case Code
     case CodeBlock
@@ -23,36 +22,34 @@ enum MarkdownElement : Printable {
         get {
             var prefix = "MarkdownElement."
             switch(self) {
-                case Head:
-                    return prefix + "Head"
-                case Bold:
-                    return prefix + "Bold"
-                case Italic:
-                    return prefix + "Italic"
-                case List:
-                    return prefix + "List"
-                case Code:
-                    return prefix + "Code"
-                case CodeBlock:
-                    return prefix + "CodeBlock"
-                case Blockquote:
-                    return prefix + "Blockquote"
-                case Link:
-                    return prefix + "Link"
-                case Image:
-                    return prefix + "Image"
+            case Head:
+                return prefix + "Head"
+            case Bold:
+                return prefix + "Bold"
+            case List:
+                return prefix + "List"
+            case Code:
+                return prefix + "Code"
+            case CodeBlock:
+                return prefix + "CodeBlock"
+            case Blockquote:
+                return prefix + "Blockquote"
+            case Link:
+                return prefix + "Link"
+            case Image:
+                return prefix + "Image"
             }
         }
     }
 }
 
 struct Markdown {
-    var element : MarkdownElement!
-    var range   : NSRange!
+    var element: MarkdownElement
+    var range  : NSRange
     
     init (element: MarkdownElement, range: NSRange) {
-        self.element = element;
-        self.range = range;
+        self.element = element
+        self.range = range
     }
 }
 
