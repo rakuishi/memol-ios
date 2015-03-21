@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MarkdownTextView: UITextView {
+class MarkdownTextView: UITextView, UITextViewDelegate, UIScrollViewDelegate {
     
     var themeTextColor: UIColor!
     var themeBackgroundColor: UIColor!
@@ -17,6 +17,7 @@ class MarkdownTextView: UITextView {
     var themeCodeColor: UIColor!
     var themeFont: UIFont!
     var themeBoldFont: UIFont!
+    var timer: NSTimer!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -40,27 +41,46 @@ class MarkdownTextView: UITextView {
         self.font = self.themeFont;
         self.tintColor = self.themeTintColor;
 
-        self.attributedText = rendarMarkdown(self.text)
+        self.delegate = self;
+        
+        var string = markdownAttributedString(self.text, range: NSRange(location: 0, length: countElements(self.text)))
+        self.textStorage.setAttributedString(string)
     }
     
-    func rendarMarkdown(string: NSString) -> NSMutableAttributedString {
+    func setTimerSchedule() {
+        if let t = timer {
+            t.invalidate()
+            timer = nil
+        }
+        
+        timer = NSTimer.scheduledTimerWithTimeInterval(0.25, target: self, selector: "updateMarkdown", userInfo: nil, repeats: false)
+    }
+    
+    func updateMarkdown() {
+        var string = markdownAttributedString(self.text, range: NSRange(location: 0, length: countElements(self.text)))
+        self.textStorage.setAttributedString(string)
+    }
+    
+    // MARK: Markdown func
+    
+    func markdownAttributedString(string: NSString, range: NSRange) -> NSMutableAttributedString {
         
         let attributedString = NSMutableAttributedString(string: string)
-        attributedString.setAttributes(textAttribute(), range: NSRange(location: 0, length: string.length))
+        attributedString.setAttributes(markdownTextAttribute(), range: range)
         
         var markdownResults = MarkdownParser.load(string);
         for result: Markdown in markdownResults {
             switch result.element {
             case .Head:
-                attributedString.addAttributes(headAttribute(), range: result.range)
+                attributedString.addAttributes(markdownHeadAttribute(), range: result.range)
             case .Bold:
-                attributedString.addAttributes(boldAttribute(), range: result.range)
+                attributedString.addAttributes(markdownBoldAttribute(), range: result.range)
             case .List:
-                attributedString.addAttributes(listAttribute(), range: result.range)
+                attributedString.addAttributes(markdownListAttribute(), range: result.range)
             case .Blockquote:
-                attributedString.addAttributes(blockquoteAttribute(), range: result.range)
+                attributedString.addAttributes(markdownBlockquoteAttribute(), range: result.range)
             case .Code, .Link, .Image:
-                attributedString.addAttributes(codeAttribute(), range: result.range)
+                attributedString.addAttributes(markdownCodeAttribute(), range: result.range)
             default:
                 break
             }
@@ -69,27 +89,57 @@ class MarkdownTextView: UITextView {
         return attributedString;
     }
     
-    func textAttribute() -> [NSObject: AnyObject] {
-        return [NSFontAttributeName: self.themeFont, NSForegroundColorAttributeName: self.themeTextColor]
+    func markdownTextAttribute() -> [NSObject: AnyObject] {
+        return [
+            NSFontAttributeName: self.themeFont,
+            NSForegroundColorAttributeName: self.themeTextColor
+        ]
     }
     
-    func headAttribute() -> [NSObject: AnyObject] {
-        return [NSFontAttributeName: self.themeBoldFont, NSForegroundColorAttributeName: self.themeHeadColor]
+    func markdownHeadAttribute() -> [NSObject: AnyObject] {
+        return [
+            NSFontAttributeName: self.themeBoldFont,
+            NSForegroundColorAttributeName: self.themeHeadColor
+        ]
     }
 
-    func boldAttribute() -> [NSObject: AnyObject] {
-        return [NSFontAttributeName: self.themeBoldFont, NSForegroundColorAttributeName: self.themeTextColor]
+    func markdownBoldAttribute() -> [NSObject: AnyObject] {
+        return [
+            NSFontAttributeName: self.themeBoldFont,
+            NSForegroundColorAttributeName: self.themeTextColor
+        ]
     }
 
-    func listAttribute() -> [NSObject: AnyObject] {
-        return [NSFontAttributeName: self.themeFont, NSForegroundColorAttributeName: self.themeTintColor]
+    func markdownListAttribute() -> [NSObject: AnyObject] {
+        return [
+            NSFontAttributeName: self.themeFont,
+            NSForegroundColorAttributeName: self.themeTintColor
+        ]
     }
 
-    func blockquoteAttribute() -> [NSObject: AnyObject] {
-        return [NSFontAttributeName: self.themeBoldFont, NSForegroundColorAttributeName: self.themeTextColor]
+    func markdownBlockquoteAttribute() -> [NSObject: AnyObject] {
+        return [
+            NSFontAttributeName: self.themeBoldFont,
+            NSForegroundColorAttributeName: self.themeTextColor
+        ]
     }
     
-    func codeAttribute() -> [NSObject: AnyObject] {
-        return [NSFontAttributeName: self.themeFont, NSForegroundColorAttributeName: self.themeCodeColor];
+    func markdownCodeAttribute() -> [NSObject: AnyObject] {
+        return [
+            NSFontAttributeName: self.themeFont,
+            NSForegroundColorAttributeName: self.themeCodeColor
+        ];
+    }
+    
+    // MARK: UITextViewDelegate
+    
+    func textViewDidChange(textView: UITextView) {
+        setTimerSchedule()
+    }
+
+    // MARK: UIScrollViewDelegate
+
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        setTimerSchedule()
     }
 }
