@@ -25,8 +25,8 @@ class ViewController: UIViewController {
     }
 
     @IBAction func onTapShareButton(sender:AnyObject) {
-        let objectToShare = [self.markdownTextView.text]
-        let activityViewController = UIActivityViewController(activityItems: objectToShare, applicationActivities: nil)
+        let activityItems = [self.markdownTextView.text]
+        let activityViewController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
         self.presentViewController(activityViewController, animated: true, completion: nil)
     }
 }

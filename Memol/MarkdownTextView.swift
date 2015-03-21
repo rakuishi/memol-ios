@@ -36,12 +36,12 @@ class MarkdownTextView: UITextView, UITextViewDelegate, UIScrollViewDelegate {
         self.themeFont = UIFont(name: "AvenirNext-Regular", size: 16.0)
         self.themeBoldFont = UIFont(name: "AvenirNext-Medium", size: 16.0)
         
-        self.backgroundColor = self.themeBackgroundColor;
-        self.textColor = self.themeTextColor;
-        self.font = self.themeFont;
-        self.tintColor = self.themeTintColor;
+        self.backgroundColor = self.themeBackgroundColor
+        self.textColor = self.themeTextColor
+        self.font = self.themeFont
+        self.tintColor = self.themeTintColor
 
-        self.delegate = self;
+        self.delegate = self
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardDidShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidHide:", name: UIKeyboardDidHideNotification, object: nil)
         
@@ -84,6 +84,7 @@ class MarkdownTextView: UITextView, UITextViewDelegate, UIScrollViewDelegate {
         
         var loc = self.offsetFromPosition(self.beginningOfDocument, toPosition:start)
         var length = self.offsetFromPosition(start, toPosition: end)
+        
         return NSMakeRange(loc, length)
     }
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum MarkdownElement : Printable {
+enum MarkdownElement: Printable {
     case Head
     case Bold
     case List
@@ -42,7 +42,7 @@ enum MarkdownElement : Printable {
 
 struct Markdown {
     var element: MarkdownElement
-    var range  : NSRange
+    var range: NSRange
     
     init (element: MarkdownElement, range: NSRange) {
         self.element = element
@@ -54,17 +54,17 @@ class MarkdownParser: NSObject {
     
     class func load(string: String) -> [Markdown] {
         var markdowns = [Markdown]()
-        var markdownPatterns = [MarkdownElement : NSString]()
+        var markdownPatterns = [MarkdownElement: NSString]()
 
         // setup markdown pattern
         markdownPatterns = [
-            MarkdownElement.Head : "((^#+|\\n#+).*)",
-            MarkdownElement.Bold : "(\\*.+?\\*)",
-            MarkdownElement.List : "(\\n[\\*|-])\\s",
-            MarkdownElement.Blockquote : "(\\n\\>)\\s",
-            MarkdownElement.Code : "(`.+?`)",
-            MarkdownElement.Link : "(\\[[^\\]]*\\]\\([^\\)]*\\))",
-            MarkdownElement.Image : "(!\\[[^\\]]*\\]\\([^\\)]*\\))",
+            MarkdownElement.Head: "((^#+|\\n#+).*)",
+            MarkdownElement.Bold: "(\\*.+?\\*)",
+            MarkdownElement.List: "(\\n[\\*|-])\\s",
+            MarkdownElement.Blockquote: "(\\n\\>)\\s",
+            MarkdownElement.Code: "(`.+?`)",
+            MarkdownElement.Link: "(\\[[^\\]]*\\]\\([^\\)]*\\))",
+            MarkdownElement.Image: "(!\\[[^\\]]*\\]\\([^\\)]*\\))",
         ]
 
         for (element, pattern) in markdownPatterns {
