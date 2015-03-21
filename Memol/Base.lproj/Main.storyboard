@@ -67,7 +67,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Memol" id="gkl-4g-7aO">
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="b2W-7d-c1J"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="b2W-7d-c1J">
+                            <connections>
+                                <action selector="onTapShareButton:" destination="vXZ-lx-hvc" id="esm-bI-Pnw"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="markdownTextView" destination="SCt-u8-y3g" id="Cei-Rr-CBl"/>

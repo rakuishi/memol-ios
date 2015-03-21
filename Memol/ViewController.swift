@@ -24,6 +24,10 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
+    @IBAction func onTapShareButton(sender:AnyObject) {
+        let objectToShare = [self.markdownTextView.text]
+        let activityViewController = UIActivityViewController(activityItems: objectToShare, applicationActivities: nil)
+        self.presentViewController(activityViewController, animated: true, completion: nil)
+    }
 }
 
