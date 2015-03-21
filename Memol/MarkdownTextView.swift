@@ -175,7 +175,7 @@ class MarkdownTextView: UITextView, UITextViewDelegate, UIScrollViewDelegate {
     // MARK: Keyboard Delegate
     
     func keyboardDidShow(notification: NSNotification) {
-        if let rectValue = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue {
+        if let rectValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardSize = rectValue.CGRectValue().size
             updateInsets(keyboardSize.height)
         }
