@@ -90,7 +90,10 @@ class MarkdownTextView: UITextView, UITextViewDelegate, UIScrollViewDelegate {
     // MARK: Markdown func
     
     func rendarMarkdown(string: NSString, range: NSRange) {
-        
+        // @see http://stackoverflow.com/questions/16716525/replace-uitextviews-text-with-attributed-string
+        // Just disable scrolling before formatting text and enable it after formatting
+        self.scrollEnabled = false
+
         // let attributedString = NSMutableAttributedString(string: string)
         self.textStorage.addAttributes(markdownTextAttribute(), range: range)
         
@@ -111,6 +114,8 @@ class MarkdownTextView: UITextView, UITextViewDelegate, UIScrollViewDelegate {
                 break
             }
         }
+        
+        self.scrollEnabled = true
     }
     
     func markdownTextAttribute() -> [NSObject: AnyObject] {
