@@ -42,9 +42,10 @@ class MarkdownTextView: UITextView, UITextViewDelegate, UIScrollViewDelegate {
         self.tintColor = self.themeTintColor;
 
         self.delegate = self;
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardDidShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidHide:", name: UIKeyboardDidHideNotification, object: nil)
         
-        var string = markdownAttributedString(self.text, range: NSRange(location: 0, length: countElements(self.text)))
-        self.textStorage.setAttributedString(string)
+        rendarMarkdown(self.text, range: visibleRange())
     }
     
     func setTimerSchedule() {
@@ -57,36 +58,59 @@ class MarkdownTextView: UITextView, UITextViewDelegate, UIScrollViewDelegate {
     }
     
     func updateMarkdown() {
-        var string = markdownAttributedString(self.text, range: NSRange(location: 0, length: countElements(self.text)))
-        self.textStorage.setAttributedString(string)
+        rendarMarkdown(self.text, range: visibleRange())
+    }
+    
+    func updateInsets(height: CGFloat) {
+        var insets = UIEdgeInsetsMake(0.0, 0.0, height, 0.0)
+        self.contentInset = insets
+        self.scrollIndicatorInsets = insets
+    }
+
+    func visibleRange() -> NSRange {
+        var bounds:CGRect = self.bounds
+        var start = self.beginningOfDocument
+        var end = self.endOfDocument
+
+        var startpoint = self.characterRangeAtPoint(bounds.origin)
+        if let s = startpoint {
+            start = s.start
+        }
+        
+        var endpoint = self.characterRangeAtPoint(CGPointMake(CGRectGetMaxX(bounds), CGRectGetMaxY(bounds)))
+        if let e = endpoint {
+            end = e.end
+        }
+        
+        var loc = self.offsetFromPosition(self.beginningOfDocument, toPosition:start)
+        var length = self.offsetFromPosition(start, toPosition: end)
+        return NSMakeRange(loc, length)
     }
     
     // MARK: Markdown func
     
-    func markdownAttributedString(string: NSString, range: NSRange) -> NSMutableAttributedString {
+    func rendarMarkdown(string: NSString, range: NSRange) {
         
-        let attributedString = NSMutableAttributedString(string: string)
-        attributedString.setAttributes(markdownTextAttribute(), range: range)
+        // let attributedString = NSMutableAttributedString(string: string)
+        self.textStorage.addAttributes(markdownTextAttribute(), range: range)
         
         var markdownResults = MarkdownParser.load(string);
         for result: Markdown in markdownResults {
             switch result.element {
             case .Head:
-                attributedString.addAttributes(markdownHeadAttribute(), range: result.range)
+                self.textStorage.addAttributes(markdownHeadAttribute(), range: result.range)
             case .Bold:
-                attributedString.addAttributes(markdownBoldAttribute(), range: result.range)
+                self.textStorage.addAttributes(markdownBoldAttribute(), range: result.range)
             case .List:
-                attributedString.addAttributes(markdownListAttribute(), range: result.range)
+                self.textStorage.addAttributes(markdownListAttribute(), range: result.range)
             case .Blockquote:
-                attributedString.addAttributes(markdownBlockquoteAttribute(), range: result.range)
+                self.textStorage.addAttributes(markdownBlockquoteAttribute(), range: result.range)
             case .Code, .Link, .Image:
-                attributedString.addAttributes(markdownCodeAttribute(), range: result.range)
+                self.textStorage.addAttributes(markdownCodeAttribute(), range: result.range)
             default:
                 break
             }
         }
-        
-        return attributedString;
     }
     
     func markdownTextAttribute() -> [NSObject: AnyObject] {
@@ -140,6 +164,20 @@ class MarkdownTextView: UITextView, UITextViewDelegate, UIScrollViewDelegate {
     // MARK: UIScrollViewDelegate
 
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        setTimerSchedule()
+         setTimerSchedule()
     }
+
+    // MARK: Keyboard Delegate
+    
+    func keyboardDidShow(notification: NSNotification) {
+        if let rectValue = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue {
+            let keyboardSize = rectValue.CGRectValue().size
+            updateInsets(keyboardSize.height)
+        }
+    }
+    
+    func keyboardDidHide(notification: NSNotification) {
+        updateInsets(0)
+    }
+
 }
