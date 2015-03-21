@@ -33,8 +33,8 @@ class MarkdownTextView: UITextView, UITextViewDelegate, UIScrollViewDelegate {
         self.themeTintColor = UIColor(rgb: "#EFB944")
         self.themeCodeColor = UIColor(rgb: "#92A5A6")
         
-        self.themeFont = UIFont(name: "AvenirNext-Medium", size: 16.0)
-        self.themeBoldFont = UIFont(name: "AvenirNext-DemiBold", size: 16.0)
+        self.themeFont = UIFont(name: "AvenirNext-Regular", size: 16.0)
+        self.themeBoldFont = UIFont(name: "AvenirNext-Medium", size: 16.0)
         
         self.backgroundColor = self.themeBackgroundColor;
         self.textColor = self.themeTextColor;
@@ -170,6 +170,12 @@ class MarkdownTextView: UITextView, UITextViewDelegate, UIScrollViewDelegate {
 
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
          setTimerSchedule()
+    }
+    
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if self.contentOffset.y <= -50 {
+            resignFirstResponder()
+        }
     }
 
     // MARK: Keyboard Delegate
